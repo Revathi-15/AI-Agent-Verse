@@ -1,3 +1,36 @@
+# ── Secrets & credentials ──────────────────────────────────────────────────
 .env
+*.env
 gmail/client-secret.json
 gmail/token files/
+nl_to_sql/google_service_account.json
+
+# ── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environments ────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+gmail/.venv/
+
+# ── Databases & data files ──────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+nl_to_sql/data/*.csv
+
+# ── IDE ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+
+# ── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

@@ -1,3 +1,10 @@
+# ── New enterprise dependencies ───────────────────────────────────────────────
+reportlab==4.2.5
+openpyxl==3.1.5
+schedule==1.2.2
+# google-api-python-client already present below
+# google-auth-oauthlib already present below
+# ─────────────────────────────────────────────────────────────────────────────
 aiohappyeyeballs==2.6.1
 aiohttp==3.12.14
 aiosignal==1.4.0
