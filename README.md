@@ -1,94 +1,126 @@
 # AI Agent Verse
 
-A collection of AI-powered agent projects built with Python, FastAPI, Dash, and Claude/OpenAI/Gemini.
+A collection of production-grade AI agent projects — NL→SQL platform and Gmail MCP agent.
 
 ---
 
-## Projects
+## 🚀 NL → SQL Enterprise Platform
 
-### NL → SQL Enterprise Platform (`nl_to_sql/`)
+Ask questions in plain English. Get SQL, interactive charts, PDF reports, and insights — automatically.
 
-Ask questions in plain English — get SQL, charts, and insights from your data.
+### What it does
 
-**Features**
-- Natural language → SQL → interactive charts (bar, line, pie, scatter, histogram)
-- 6-agent pipeline: Planner → Schema → SQL → Validation → Visualization → Explanation
-- Streaming responses with step-by-step status
-- Smart auto-chart selection based on data shape
-- Google Sheets export
-- Email reports (PDF + CSV via SMTP)
-- Scheduled recurring reports (daily / weekly / monthly)
-- Voice input (browser Web Speech API + OpenAI Whisper)
-- Image-to-SQL: upload a dashboard screenshot → AI infers the SQL
-- Vector semantic search over query history
-- SQL Tutor mode: explains SQL, suggests alternatives, gives optimization tips
-- Natural language dashboard builder
-- Live DB connections: PostgreSQL, MySQL, SQLite
-- User permissions: Admin / Manager / Analyst / Viewer
-- Audit log: every query tracked with user, time, SQL, rows, elapsed
-- Feedback loop: 👍 / 👎 stored to improve prompts
-- Conversation history with 2-day auto-expiry (PostgreSQL or SQLite)
-- 15 active MCP tools · 134 in catalog
+| Capability | Description |
+|---|---|
+| 💬 Natural Language → SQL | Type a question, get a query + results + chart |
+| 📊 Smart Charts | Auto-selects bar / line / pie / scatter / histogram |
+| 🤖 Multi-Agent Pipeline | Planner → Schema → SQL → Validation → Viz → Explanation |
+| 📧 Email Reports | Sends PDF + CSV via SMTP |
+| 🗓️ Scheduled Reports | Daily / weekly / monthly recurring emails |
+| 📗 Google Sheets Export | One-click export to a new spreadsheet |
+| 🖼️ Image → SQL | Upload a dashboard screenshot → AI infers the SQL |
+| 🔮 Semantic History | Finds similar past queries using vector search |
+| 🎓 SQL Tutor | Explains SQL, shows alternatives, optimization tips |
+| 🎤 Voice Input | Browser speech recognition + OpenAI Whisper |
+| 📋 Audit Log | Every query tracked — user, time, SQL, rows, elapsed |
+| 👍 Feedback Loop | Thumbs up/down stored to improve prompts |
+| 🛡️ User Permissions | Admin / Manager / Analyst / Viewer roles |
 
-**Stack**
-- Backend: FastAPI + SQLite/PostgreSQL
-- Frontend: Plotly Dash + Bootstrap
-- LLMs: OpenAI GPT-4o / Claude 3.5 / Gemini 2.0 (switchable)
+### Tech Stack
 
-**Quick Start**
+| Layer | Tech |
+|---|---|
+| Backend | Python · FastAPI · SQLite / PostgreSQL |
+| Frontend | Plotly Dash · Dash Bootstrap Components |
+| LLMs | OpenAI GPT-4o · Claude 3.5 Sonnet · Gemini 2.0 (switchable) |
+| Charts | Plotly Express |
+| PDF | ReportLab |
+| Voice | OpenAI Whisper API |
+| Scheduling | `schedule` library (background thread) |
+| Vector Search | TF-IDF cosine similarity (local, no external API) |
+
+---
+
+## ⚡ Quick Start
 
 ```bash
-# 1. Create and activate virtual environment
-python -m venv .venv
-.venv\Scripts\activate        # Windows
-source .venv/bin/activate     # Mac/Linux
+# 1. Clone
+git clone https://github.com/Revathi-15/AI-Agent-Verse.git
+cd AI-Agent-Verse
 
-# 2. Install dependencies
+# 2. Create virtual environment
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # Mac / Linux
+
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 3. Configure environment
+# 4. Configure environment
 cp nl_to_sql/.env.example nl_to_sql/.env
-# Edit .env and add your API keys
+# Open .env and add your API key(s)
 
-# 4. Run
+# 5. Run
 cd nl_to_sql
 python run.py
 ```
 
-Opens automatically at `http://127.0.0.1:8050`
-
-**Environment Variables**
-
-See `nl_to_sql/.env.example` for all required and optional keys.
+Opens at **http://127.0.0.1:8050** · API at **http://127.0.0.1:8000**
 
 ---
 
-### Gmail MCP Agent (`gmail/`)
+## 🔑 Minimum .env Required
 
-MCP server for Gmail — read, send, search emails via Claude.
+```env
+LLM_PROVIDER=openai          # openai | claude | gemini
+OPENAI_API_KEY=sk-...
+SQLITE_DB=sqlite.db
+```
+
+Everything else (email, Google Sheets, Slack, PostgreSQL) is optional — see `.env.example`.
 
 ---
 
-## Repository Structure
+## 📁 Structure
 
 ```
-AI Agent Verse/
+AI-Agent-Verse/
 ├── nl_to_sql/
+│   ├── run.py                  # Single entry point — starts everything
 │   ├── backend/
-│   │   ├── api.py            # FastAPI routes
-│   │   ├── database.py       # SQLite/PostgreSQL helpers
-│   │   ├── llm.py            # LLM abstraction layer
-│   │   ├── orchestrator.py   # Multi-agent orchestration
-│   │   └── tools/            # 15 MCP tool implementations
+│   │   ├── api.py              # FastAPI — all routes
+│   │   ├── database.py         # SQLite + PostgreSQL helpers
+│   │   ├── llm.py              # OpenAI / Claude / Gemini abstraction
+│   │   ├── orchestrator.py     # Multi-agent pipeline
+│   │   └── tools/              # 15 MCP tool implementations
 │   ├── frontend/
-│   │   ├── app.py            # Dash app instance
-│   │   ├── layout.py         # UI layout + chart builder
-│   │   └── callbacks.py      # All Dash callbacks
-│   ├── data/                 # CSV data files (gitignored)
-│   ├── run.py                # Single entry point
-│   └── .env.example          # Environment template
-├── gmail/
-│   ├── mcp_gmail.py
-│   └── tools/
-└── requirements.txt
+│   │   ├── app.py              # Dash app instance
+│   │   ├── layout.py           # UI — 3-column layout + charts
+│   │   └── callbacks.py        # All interactivity
+│   └── .env.example
+├── gmail/                      # Gmail MCP agent
+├── requirements.txt
+└── README.md
 ```
+
+---
+
+## 📦 Dependencies
+
+```bash
+pip install fastapi uvicorn dash dash-bootstrap-components plotly pandas \
+            openai anthropic google-generativeai reportlab openpyxl \
+            requests python-dotenv schedule sqlalchemy
+```
+
+---
+
+## 📸 Gmail MCP Agent (`gmail/`)
+
+MCP server that gives Claude access to your Gmail — read, send, search emails.
+
+**Setup:** Add `gmail/client-secret.json` from Google Cloud Console, then run `gmail/mcp_gmail.py`.
+
+---
+
+> Built by [Revathi](https://github.com/Revathi-15)
