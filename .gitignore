@@ -5,12 +5,11 @@ gmail/client-secret.json
 gmail/token files/
 nl_to_sql/google_service_account.json
 
-# ── Python ─────────────────────────────────────────────────────────────────
+# ── Python cache ────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-.Python
 
 # ── Virtual environments ────────────────────────────────────────────────────
 .venv/
@@ -19,17 +18,17 @@ env/
 ENV/
 gmail/.venv/
 
-# ── Databases & data files ──────────────────────────────────────────────────
+# ── Databases ───────────────────────────────────────────────────────────────
 *.db
 *.sqlite
 *.sqlite3
-nl_to_sql/data/*.csv
+
+# ── Data files (keep .env.example, exclude raw CSVs) ────────────────────────
+nl_to_sql/data/
 
 # ── IDE ─────────────────────────────────────────────────────────────────────
 .vscode/
 .idea/
-*.suo
-*.user
 
 # ── OS ──────────────────────────────────────────────────────────────────────
 .DS_Store
